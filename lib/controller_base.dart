@@ -82,7 +82,7 @@ class ControllerBase{
       return await httpMethod(method, HttpMethods.POST, bodyJson: bodyJson);
   }   
 
-  Future<ResultApplication> delete(String method, Object body) async{
+  Future<ResultApplication> delete(String method, {Object? body}) async{
     return await httpMethod(method, HttpMethods.DELETE, body: body);
   }
 
@@ -90,7 +90,7 @@ class ControllerBase{
     return await httpMethod(method, HttpMethods.PUT, bodyJson: bodyJson);
   }
 
-  Future<ResultApplication> get(String method, Map<String, String> parameters) async{
+  Future<ResultApplication> get(String method, {Map<String, String>? parameters}) async{
     return await httpMethod(method, HttpMethods.GET, parameters: parameters);
   }
 

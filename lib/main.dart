@@ -41,7 +41,8 @@ class _MainState extends State<Main> {
         actions: [
             IconButton(onPressed: () => _incluir(), icon: const Icon(Icons.add)),
             IconButton(onPressed: () => _excluir(), icon: const Icon(Icons.delete)),
-            IconButton(onPressed: () => _atualizar(), icon: const Icon(Icons.update))
+            IconButton(onPressed: () => _atualizar(), icon: const Icon(Icons.update)),
+            IconButton(onPressed: () => _buscar(), icon: const Icon(Icons.search)),
         ],
         title: const Text('Revisão Prova'),
       ),
@@ -87,12 +88,33 @@ class _MainState extends State<Main> {
     _defineDados();
     ResultApplication result = await alunoController.excluir(aluno.codigo!);
     await _exibeMensagem(result);
+    if (result.success!){
+      codigoTextController.text = "";
+      nomeTextController.text = "";
+    }
+
   }
 
   void _atualizar() async{   
     _defineDados();
     ResultApplication result = await alunoController.atualizar(aluno);
     await _exibeMensagem(result);
+  }
+  
+  void _buscar() async{
+    if (codigoTextController.text.isEmpty){
+        HelperWidgets.showMessageDialog("Preencha o campo código", context);
+        return;
+    }
+
+    _defineDados();
+    ResultApplication result = await alunoController.buscar(aluno.codigo!);
+    await _exibeMensagem(result);
+    if (result.success!){
+        codigoTextController.text = result.aluno!.codigo.toString();
+        nomeTextController.text = result.aluno!.nome!;
+    }   
+
   }
   
 

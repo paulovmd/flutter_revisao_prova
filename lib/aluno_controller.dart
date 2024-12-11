@@ -13,18 +13,12 @@ class AlunoController extends ControllerBase{
   }
 
   Future<ResultApplication> excluir(int codigo) async{
-    return await delete("Excluir", codigo);
+    return await delete("Excluir($codigo)");
   }
   
   Future<ResultApplication> buscar(int codigo) async{
-    Map<String, String> parametros = {"codigo" : codigo.toString()};
-    return await get("Buscar", parametros);
+    //Map<String, String> parametros = {"codigo" : codigo.toString()};
+    return await get("Buscar($codigo)");
   }
-  
-  Future<ResultApplication> buscarTodos() async{
-    Map<String, String> parametros = {};
-    return await get("BuscarTodos", parametros);
-  }
-
 
 }
